@@ -36,7 +36,7 @@ In short, we get this scenario:
 (integer? 1.0) ; true
 ```
 
-Most of the time the difference between integers and floats doesn't matter at all, but sometimes it really does matter and native JavaScript really comes up short here.
+Most of the time the difference between integers and floats doesn't matter at all, but sometimes it really does matter and native JavaScript comes up short.
 
 Notably we don't get access to the full 64 bits for integer operations. JavaScript "integers" only supports [53 bits for regular arithmatic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) and [32 bits for bitwise operations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
