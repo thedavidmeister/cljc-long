@@ -26,7 +26,7 @@ JavaScript does _not_ natively support 64 bit _integers_ at all. Instead it prov
 
 In short, we get this scenario:
 
-```
+```clojure
 ; clojure/JVM
 (integer? 1) ; true
 (integer? 1.0) ; false
