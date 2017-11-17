@@ -16,7 +16,7 @@ Many of the functions here are simply direct references to clojure core function
 
 E.g.
 
-```
+```clojure
 (def bit-xor clojure.core/bit-xor)
 ```
 
@@ -40,7 +40,7 @@ Most of the time the difference between integers and floats doesn't matter at al
 
 Notably we don't get access to the full 64 bits for integer operations. JavaScript "integers" only supports [53 bits for regular arithmatic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) and [32 bits for bitwise operations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
-```
+```clojure
 ; clojure/JVM
 (inc 9007199254740992) ; 9007199254740993
 (bit-shift-left 4294967296 1) ; 8589934592
@@ -56,7 +56,7 @@ Many of the functions here are wrappers around the `goog.math.Long` methods.
 
 E.g.
 
-```
+```clojure
 (defn bit-xor
   [a b]
   (.xor a b))
