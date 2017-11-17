@@ -22,7 +22,7 @@ E.g.
 
 ## ClojureScript
 
-JavaScript does _not_ natively suppot _integers_ at all. Instead it provides [IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) 64 bit _floats_. All the "integer" methods provided such as `Number.isInteger()` work on the _value_ of a float, not its type (there are no other number types in JavaScript).
+JavaScript does _not_ natively support 64 bit _integers_ at all. Instead it provides [IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) 64 bit _floats_. All the "integer" methods provided such as `Number.isInteger()` work on the _value_ of a float, not its type (there are no other number types in JavaScript).
 
 In short, we get this scenario:
 
