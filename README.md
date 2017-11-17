@@ -50,7 +50,9 @@ Notably we don't get access to the full 64 bits for integer operations. JavaScri
 (bit-shift-left 4294967296 1) ; 0
 ```
 
-Google Closure provides full 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions.
+Google Closure provides full 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions. For example, `(= a b c)` is valid in clojure but the closure equivalent would be something like `(and (.equals a b) (.equals b c))`.
+
+Arbitrary arities are currently not supported as `goog.math.Long` doesn't support arbitrary arities. [This might change in the future](https://github.com/thedavidmeister/cljc-long/issues/1).
 
 Many of the functions here are wrappers around the `goog.math.Long` methods.
 
