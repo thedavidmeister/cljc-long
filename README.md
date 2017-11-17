@@ -33,7 +33,7 @@ In short, we get this scenario:
 
 ; clojurescript/JS
 (integer? 1) ; true
-(integer? 1.0) true
+(integer? 1.0) ; true
 ```
 
 Most of the time the difference between integers and floats doesn't matter at all, but sometimes it really does matter and native JavaScript really comes up short here.
