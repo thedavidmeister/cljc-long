@@ -7,4 +7,4 @@
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
 (deftest ??long
- (is (l/long? "123")))
+ (is (l/long? (l/long "123"))))
