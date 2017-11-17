@@ -2,6 +2,8 @@
 
 Signed 64 bit integers for Clojure(Script).
 
+[![Clojars Project](https://img.shields.io/clojars/v/thedavidmeister/cljc-long.svg)](https://clojars.org/thedavidmeister/cljc-long)
+
 Function names follow clojure conventions, e.g. [`bit-xor`](https://clojuredocs.org/clojure.core/bit-xor) not just `xor`.
 
 A few new functions have been added too, e.g. `long?`.
