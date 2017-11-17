@@ -22,9 +22,35 @@ E.g.
 
 ## ClojureScript
 
-JavaScript does _not_ natively support signed 64 bit _integers_. Instead it provides [IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) 64 bit _floats_.
+JavaScript does _not_ natively suppot _integers_ at all. Instead it provides [IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) 64 bit _floats_. All the "integer" methods provided such as `Number.isInteger()` work on the _value_ of a float, not its type (there are no other number types in JavaScript).
 
-Google Closure provides 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions.
+In short, we get this scenario:
+
+```
+; clojure/JVM
+(integer? 1) ; true
+(integer? 1.0) ; false
+
+; clojurescript/JS
+(integer? 1) ; true
+(integer? 1.0) true
+```
+
+Most of the time the difference between integers and floats doesn't matter at all, but sometimes it really does matter and native JavaScript really comes up short here.
+
+Notably we don't get access to the full 64 bits for integer operations. JavaScript "integers" only supports [53 bits for regular arithmatic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) and [32 bits for bitwise operations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
+
+```
+; clojure/JVM
+(inc 9007199254740992) ; 9007199254740993
+(bit-shift-left 4294967296 1) ; 8589934592
+
+; clojurescript/JS
+(inc 9007199254740992) ; 9007199254740992
+(bit-shift-left 4294967296 1) ; 0
+```
+
+Google Closure provides full 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions.
 
 Many of the functions here are wrappers around the `goog.math.Long` methods.
 
@@ -35,3 +61,5 @@ E.g.
   [a b]
   (.xor a b))
 ```
+
+This abstraction is a little leaky though as the return values necessarily need to be `goog.math.Long` _objects_ rather than native floats.
