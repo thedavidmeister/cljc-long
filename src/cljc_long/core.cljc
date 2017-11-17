@@ -24,6 +24,14 @@
   #?(:cljs (goog.math.Long.fromNumber a)
      :clj (cast Long a))))
 
+(def max-value
+ #?(:clj Long/MAX_VALUE
+    :cljs (goog.math.Long/getMaxValue)))
+
+(def min-value
+ #?(:clj Long/MIN_VALUE
+    :cljs (goog.math.Long/getMinValue)))
+
 (defn +
  [^long a ^long b]
  #?(:cljs (.add a b)

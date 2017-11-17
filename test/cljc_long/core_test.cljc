@@ -8,3 +8,15 @@
 
 (deftest ??long
  (is (l/long? (l/long "123"))))
+
+(deftest ??max-value
+ (is
+  (l/=
+   (l/long "9223372036854775807")
+   l/max-value)))
+
+(deftest ??min-value
+ (is
+  (l/=
+   (l/long "-9223372036854775808")
+   l/min-value)))
