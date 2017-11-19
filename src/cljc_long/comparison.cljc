@@ -1,5 +1,5 @@
 (ns cljc-long.comparison
- (:refer-clojure :exclude [> >= = <= <]))
+ (:refer-clojure :exclude [> >= = <= < compare]))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
@@ -43,3 +43,11 @@
     {:pre [(cljc-long.type/long? a)
            (cljc-long.type/long? b)]}
     (.lessThan a b)))
+
+#?(:clj (def compare clojure.core/compare)
+   :cljs
+   (defn compare
+    [a b]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? b)]}
+    (.compare a b)))

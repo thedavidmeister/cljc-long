@@ -9,6 +9,7 @@
                            =
                            <=
                            <
+                           compare
                            unsigned-bit-shift-right
                            bit-shift-left
                            bit-and
@@ -40,6 +41,7 @@
 (def = cljc-long.comparison/=)
 (def <= cljc-long.comparison/<=)
 (def < cljc-long.comparison/<)
+(def compare cljc-long.comparison/compare)
 
 (defn native-rand
  []
