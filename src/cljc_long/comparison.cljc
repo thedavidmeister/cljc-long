@@ -28,6 +28,12 @@
            (cljc-long.type/long? b)]}
     (.equals a b)))
 
+#?(:clj (def not= clojure.core/not=)
+   :cljs
+   (defn not=
+    [a b]
+    (.notEquals a b)))
+
 #?(:clj (def <= clojure.core/<=)
    :cljs
    (defn <=
