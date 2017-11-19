@@ -1,14 +1,19 @@
 (ns cljc-long.core
  (:refer-clojure :exclude [long
+                           +
+                           -
+                           *
+                           /
+                           >
+                           >=
+                           =
+                           <=
+                           <
                            unsigned-bit-shift-right
                            bit-shift-left
                            bit-and
-                           bit-xor
-                           *
-                           /
-                           +
-                           =
-                           -])
+                           bit-xor])
+
  (:require
   #?(:cljs goog.math.Long)
   cljc-long.type
@@ -30,7 +35,11 @@
 (def * cljc-long.arithmetic/*)
 (def / cljc-long.arithmetic//)
 
+(def > cljc-long.comparison/>)
+(def >= cljc-long.comparison/>=)
 (def = cljc-long.comparison/=)
+(def <= cljc-long.comparison/<=)
+(def < cljc-long.comparison/<)
 
 (defn native-rand
  []
