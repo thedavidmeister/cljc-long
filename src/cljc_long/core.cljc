@@ -1,56 +1,47 @@
 (ns cljc-long.core
- (:refer-clojure :exclude [long unsigned-bit-shift-right bit-shift-left bit-and bit-xor * + = -])
- #?(:cljs (:require goog.math.Long)))
+ (:refer-clojure :exclude [long
+                           +
+                           -
+                           *
+                           /
+                           >
+                           >=
+                           =
+                           <=
+                           <
+                           compare
+                           unsigned-bit-shift-right
+                           bit-shift-left
+                           bit-and
+                           bit-xor])
+
+ (:require
+  #?(:cljs goog.math.Long)
+  cljc-long.type
+  cljc-long.arithmetic
+  cljc-long.constants
+  cljc-long.comparison))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-(defn long? [a]
- #?(:cljs (instance? goog.math.Long a)
-    :clj (instance? java.lang.Long a)))
+(def long? cljc-long.type/long?)
+(def long cljc-long.type/long)
 
-(defn long
- [a]
- {:post [(long? %)]}
- (cond
-  (long? a)
-  a
+(def max-value cljc-long.constants/max-value)
+(def min-value cljc-long.constants/min-value)
 
-  (string? a)
-  #?(:cljs (goog.math.Long.fromString a 10)
-     :clj (Long/parseLong a))
+(def + cljc-long.arithmetic/+)
+(def - cljc-long.arithmetic/-)
+(def * cljc-long.arithmetic/*)
+(def / cljc-long.arithmetic//)
 
-  (number? a)
-  #?(:cljs (goog.math.Long.fromNumber a)
-     :clj (cast Long a))))
-
-(def max-value
- #?(:clj Long/MAX_VALUE
-    :cljs (goog.math.Long/getMaxValue)))
-
-(def min-value
- #?(:clj Long/MIN_VALUE
-    :cljs (goog.math.Long/getMinValue)))
-
-(defn +
- [^long a ^long b]
- #?(:cljs (.add a b)
-    :clj (clojure.core/+ a b)))
-
-(defn -
- [^long a ^long b]
- #?(:cljs (.subtract a b)
-    :clj (clojure.core/- a b)))
-
-(defn *
- [^long a ^long b]
- #?(:cljs (.multiply a b)
-    :clj (clojure.core/* a b)))
-
-(defn =
- [^long a ^long b]
- #?(:cljs (.equals a b)
-    :clj (clojure.core/= a b)))
+(def > cljc-long.comparison/>)
+(def >= cljc-long.comparison/>=)
+(def = cljc-long.comparison/=)
+(def <= cljc-long.comparison/<=)
+(def < cljc-long.comparison/<)
+(def compare cljc-long.comparison/compare)
 
 (defn native-rand
  []
@@ -62,34 +53,3 @@
       16))
     :clj
     (.nextLong (java.util.Random.))))
-
-(defn bit-xor
- [^long a ^long b]
- #?(:cljs (.xor a b)
-    :clj (clojure.core/bit-xor a b)))
-
-(defn bit-and
- [^long a ^long b]
- #?(:cljs (.and a b)
-    :clj (clojure.core/bit-and a b)))
-
-(defn bit-shift-left
- [^long a ^long n]
- #?(:cljs (.shiftLeft a n)
-    :clj (clojure.core/bit-shift-left a n)))
-
-(defn unsigned-bit-shift-right
- [^long a ^long n]
- #?(:cljs (.shiftRightUnsigned a n)
-    :clj (clojure.core/unsigned-bit-shift-right a n)))
-
-; @see int-rotate-left
-; https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/core.cljs#L879
-(defn bit-rotate-left
- [^long x ^long n]
- #?(:cljs
-    (.or
-     (.shiftLeft x n)
-     (.shiftRightUnsigned x (clojure.core/- n)))
-    :clj
-    (Long/rotateLeft x n)))

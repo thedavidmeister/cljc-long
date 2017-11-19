@@ -67,3 +67,5 @@ E.g.
 ```
 
 This abstraction is a little leaky though as the return values necessarily need to be `goog.math.Long` _objects_ rather than native floats.
+
+Note that many of the functions only work correctly if all arguments passed are Google longs. I have added `:pre` checks where this is the case for safety, but there will be some small performance overhead here. You can always disable this by passing [`{:elide-asserts true}`](https://cljs.github.io/api/compiler-options/elide-asserts) to the cljs compiler.
