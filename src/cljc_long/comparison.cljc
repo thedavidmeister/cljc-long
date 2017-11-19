@@ -1,5 +1,5 @@
 (ns cljc-long.comparison
- (:refer-clojure :exclude [> >= = <= < compare])
+ (:refer-clojure :exclude [> >= = not= <= < compare])
  (:require
   cljc-long.type))
 
