@@ -1,77 +1,36 @@
 (ns cljc-long.core
- (:refer-clojure :exclude [long unsigned-bit-shift-right bit-shift-left bit-and bit-xor * / + = -])
- #?(:cljs (:require goog.math.Long)))
+ (:refer-clojure :exclude [long
+                           unsigned-bit-shift-right
+                           bit-shift-left
+                           bit-and
+                           bit-xor
+                           *
+                           /
+                           +
+                           =
+                           -])
+ (:require
+  #?(:cljs goog.math.Long)
+  cljc-long.type
+  cljc-long.arithmetic
+  cljc-long.constants
+  cljc-long.comparison))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-; type juggling
+(def long? cljc-long.type/long?)
+(def long cljc-long.type/long)
 
-(defn long? [a]
- #?(:cljs (instance? goog.math.Long a)
-    :clj (instance? java.lang.Long a)))
+(def max-value cljc-long.constants/max-value)
+(def min-value cljc-long.constants/min-value)
 
-(defn long
- [a]
- {:post [(long? %)]}
- (cond
-  (long? a)
-  a
+(def + cljc-long.arithmetic/+)
+(def - cljc-long.arithmetic/-)
+(def * cljc-long.arithmetic/*)
+(def / cljc-long.arithmetic//)
 
-  (string? a)
-  #?(:cljs (goog.math.Long.fromString a 10)
-     :clj (Long/parseLong a))
-
-  (number? a)
-  #?(:cljs (goog.math.Long.fromNumber a)
-     :clj (cast Long a))))
-
-; constants
-
-(def max-value
- #?(:clj Long/MAX_VALUE
-    :cljs (goog.math.Long/getMaxValue)))
-
-(def min-value
- #?(:clj Long/MIN_VALUE
-    :cljs (goog.math.Long/getMinValue)))
-
-; basic arithmetic
-
-#?(:clj (def + clojure.core/+)
-   :cljs
-   (defn +
-    [a b]
-    {:pre [(long? a)
-           (long? b)]}
-    (.add a b)))
-
-#?(:clj (def - clojure.core/-)
-   :cljs
-   (defn -
-    [a b]
-    {:pre [(long? a)
-           (long? b)]}
-    (.subtract a b)))
-
-#?(:clj (def * clojure.core/*)
-   :cljs
-   (defn *
-    [a b]
-    {:pre [(long? a)
-           (long? b)]}
-    (.multiply a b)))
-
-#?(:clj (def / clojure.core//)
-   :cljs
-   (defn /
-    [a b]
-    (.div a b)))
-
-(defn =
- [^long a ^long b]
- #?(:cljs (.equals a b)
-    :clj (clojure.core/= a b)))
+(def = cljc-long.comparison/=)
 
 (defn native-rand
  []
