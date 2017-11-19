@@ -1,5 +1,5 @@
 (ns cljc-long.bitwise
- (:refer-clojure :exclude [bit-shift-left bit-shift-right])
+ (:refer-clojure :exclude [bit-and bit-not bit-or bit-xor bit-shift-left bit-shift-right unsigned-bit-shift-right])
  (:require
   cljc-long.type))
 
