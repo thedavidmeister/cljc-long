@@ -1,5 +1,7 @@
 (ns cljc-long.comparison
- (:refer-clojure :exclude [> >= = <= < compare]))
+ (:refer-clojure :exclude [> >= = <= < compare])
+ (:require
+  cljc-long.type))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
