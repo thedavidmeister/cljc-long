@@ -1,9 +1,11 @@
 (ns cljc-long.core
- (:refer-clojure :exclude [long unsigned-bit-shift-right bit-shift-left bit-and bit-xor * + = -])
+ (:refer-clojure :exclude [long unsigned-bit-shift-right bit-shift-left bit-and bit-xor * / + = -])
  #?(:cljs (:require goog.math.Long)))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
+
+; type juggling
 
 (defn long? [a]
  #?(:cljs (instance? goog.math.Long a)
@@ -24,6 +26,8 @@
   #?(:cljs (goog.math.Long.fromNumber a)
      :clj (cast Long a))))
 
+; constants
+
 (def max-value
  #?(:clj Long/MAX_VALUE
     :cljs (goog.math.Long/getMaxValue)))
@@ -32,20 +36,37 @@
  #?(:clj Long/MIN_VALUE
     :cljs (goog.math.Long/getMinValue)))
 
-(defn +
- [^long a ^long b]
- #?(:cljs (.add a b)
-    :clj (clojure.core/+ a b)))
+; basic arithmetic
 
-(defn -
- [^long a ^long b]
- #?(:cljs (.subtract a b)
-    :clj (clojure.core/- a b)))
+#?(:clj (def + clojure.core/+)
+   :cljs
+   (defn +
+    [a b]
+    {:pre [(long? a)
+           (long? b)]}
+    (.add a b)))
 
-(defn *
- [^long a ^long b]
- #?(:cljs (.multiply a b)
-    :clj (clojure.core/* a b)))
+#?(:clj (def - clojure.core/-)
+   :cljs
+   (defn -
+    [a b]
+    {:pre [(long? a)
+           (long? b)]}
+    (.subtract a b)))
+
+#?(:clj (def * clojure.core/*)
+   :cljs
+   (defn *
+    [a b]
+    {:pre [(long? a)
+           (long? b)]}
+    (.multiply a b)))
+
+#?(:clj (def / clojure.core//)
+   :cljs
+   (defn /
+    [a b]
+    (.div a b)))
 
 (defn =
  [^long a ^long b]
