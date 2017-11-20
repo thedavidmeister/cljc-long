@@ -44,6 +44,7 @@
 (def str cljc-long.coerce/str)
 (def int cljc-long.coerce/int)
 (def double cljc-long.coerce/double)
+(def string-in-range? cljc-long.coerce/string-in-range?)
 
 (def max-value cljc-long.constants/max-value)
 (def min-value cljc-long.constants/min-value)

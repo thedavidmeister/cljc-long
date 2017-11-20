@@ -81,6 +81,8 @@
 (defn string-in-range?
  ([s] (string-in-range? s (long 10)))
  ([s r]
-  {:pre [(string? s)
-         (cljc-long.type/long? r)]}
-  #?(:cljs (goog.math.Long.isStringInRange s r))))
+  {:pre [(string? s)]}
+  #?(:cljs (goog.math.Long.isStringInRange s r)
+     :clj (try
+           (boolean (long s r))
+           (catch Exception e false)))))
