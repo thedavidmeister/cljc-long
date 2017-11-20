@@ -24,7 +24,7 @@
    (string? a)
    (long a 10)
 
-   (== a (clojure.core/int a))
+   (= a (clojure.core/int a))
    #?(:cljs (goog.math.Long.fromInt a)
       :clj (clojure.core/long a))
 
