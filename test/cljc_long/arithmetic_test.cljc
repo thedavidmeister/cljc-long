@@ -47,3 +47,12 @@
  (is (l/neg? (l/long -1)))
  (is (not (l/neg? (l/long 0))))
  (is (not (l/neg? (l/long 1)))))
+
+(deftest ??odd?
+ (is (l/odd? (l/long -3)))
+ (is (not (l/odd? (l/long -2))))
+ (is (l/odd? (l/long -1)))
+ (is (not (l/odd? (l/long 0))))
+ (is (l/odd? (l/long 1)))
+ (is (not (l/odd? (l/long 2))))
+ (is (l/odd? (l/long 3))))

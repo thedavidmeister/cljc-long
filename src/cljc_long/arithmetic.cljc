@@ -49,6 +49,7 @@
    :cljs
    (defn odd?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isOdd a)))
 
 (def even? (complement odd?))
