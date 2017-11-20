@@ -49,12 +49,16 @@
    :cljs
    (defn bit-shift-right
     [a n]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? n)]}
     (.shiftRight a n)))
 
 #?(:clj (def unsigned-bit-shift-right clojure.core/unsigned-bit-shift-right)
    :cljs
    (defn unsigned-bit-shift-right
     [a n]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? n)]}
     (.shiftRightUnsigned a n)))
 
 (defn high-bits

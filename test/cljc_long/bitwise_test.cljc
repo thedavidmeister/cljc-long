@@ -51,10 +51,10 @@
 (deftest ??bit-shift-right
  (is
   (l/=
-   (l/long "-1073741824")
+   (l/long "-1152921504606846976")
    (l/bit-shift-right
-    (l/long l/min-value)
-    (l/long 33))))
+    (l/long "-100000000000000000000000000000000000000000000000000000000000000" 2)
+    (l/long 2))))
 
  (is
   (l/=
@@ -66,10 +66,10 @@
 (deftest ??unsigned-bit-shift-right
  (is
   (l/=
-   (l/long "-1073741824")
+   (l/long "3458764513820540928")
    (l/unsigned-bit-shift-right
-    (l/long l/min-value)
-    (l/long 33))))
+    (l/long "-100000000000000000000000000000000000000000000000000000000000000" 2)
+    (l/long 2))))
 
  (is
   (l/=

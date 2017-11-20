@@ -60,7 +60,7 @@
 (def bit-xor cljc-long.bitwise/bit-xor)
 (def bit-shift-left cljc-long.bitwise/bit-shift-left)
 (def bit-shift-right cljc-long.bitwise/bit-shift-right)
-(def unsigned-bit-shift-right cljc-long.bitwise/bit-shift-right)
+(def unsigned-bit-shift-right cljc-long.bitwise/unsigned-bit-shift-right)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)
