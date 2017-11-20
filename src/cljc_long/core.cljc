@@ -1,6 +1,8 @@
 (ns cljc-long.core
  (:refer-clojure :exclude [long
                            str
+                           int
+                           double
                            +
                            -
                            *
@@ -28,6 +30,7 @@
  (:require
   #?(:cljs goog.math.Long)
   cljc-long.type
+  cljc-long.coerce
   cljc-long.arithmetic
   cljc-long.bitwise
   cljc-long.constants
@@ -37,8 +40,10 @@
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
 (def long? cljc-long.type/long?)
-(def long cljc-long.type/long)
-(def str cljc-long.type/str)
+(def long cljc-long.coerce/long)
+(def str cljc-long.coerce/str)
+(def int cljc-long.coerce/int)
+(def double cljc-long.coerce/double)
 
 (def max-value cljc-long.constants/max-value)
 (def min-value cljc-long.constants/min-value)
