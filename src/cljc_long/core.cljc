@@ -42,6 +42,10 @@
 
 (def max-value cljc-long.constants/max-value)
 (def min-value cljc-long.constants/min-value)
+(def zero cljc-long.constants/zero)
+(def one cljc-long.constants/one)
+(def neg-one cljc-long.constants/neg-one)
+(def two-power-24 cljc-long.constants/two-power-24)
 
 (def + cljc-long.arithmetic/+)
 (def - cljc-long.arithmetic/-)
