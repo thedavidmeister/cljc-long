@@ -42,3 +42,64 @@
    (l//
     (l/long "54043195528445970")
     (l/long 2)))))
+
+(deftest ??neg?
+ (is (l/neg? (l/long -1)))
+ (is (not (l/neg? (l/long 0))))
+ (is (not (l/neg? (l/long 1)))))
+
+(deftest ??odd?
+ (is (l/odd? (l/long -3)))
+ (is (not (l/odd? (l/long -2))))
+ (is (l/odd? (l/long -1)))
+ (is (not (l/odd? (l/long 0))))
+ (is (l/odd? (l/long 1)))
+ (is (not (l/odd? (l/long 2))))
+ (is (l/odd? (l/long 3)))
+ (is (l/odd? (l/long "9007199254740993"))))
+
+(deftest ??even?
+ (is (not (l/even? (l/long -3))))
+ (is (l/even? (l/long -2)))
+ (is (not (l/even? (l/long -1))))
+ (is (l/even? (l/long 0)))
+ (is (not (l/even? (l/long 1))))
+ (is (l/even? (l/long 2)))
+ (is (not (l/even? (l/long 3))))
+ (is (not (l/even? (l/long "9007199254740993")))))
+
+(deftest ??zero?
+ (is (not (l/zero? (l/long -1))))
+ (is (l/zero? (l/long 0)))
+ (is (not (l/zero? (l/long 1)))))
+
+(deftest ??mod
+ ; (mod 9007199254740993 2)
+ ; 0 in cljs
+ (is
+  (l/=
+   (l/long 1)
+   (l/mod (l/long "9007199254740993") (l/long 2)))))
+
+(deftest ??unchecked-negate
+ (is
+  (l/=
+   l/min-value
+   (l/unchecked-negate cljc-long.constants/min-value)))
+
+ (is
+  (l/=
+   (l/+ l/min-value (l/long 1))
+   (l/unchecked-negate l/max-value)))
+
+ (is (l/zero? (l/unchecked-negate (l/long 0))))
+
+ (is
+  (l/=
+   (l/long -1)
+   (l/unchecked-negate (l/long 1))))
+
+ (is
+  (l/=
+   (l/long 1)
+   (l/unchecked-negate (l/long -1)))))

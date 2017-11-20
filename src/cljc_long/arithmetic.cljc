@@ -42,12 +42,14 @@
    :cljs
    (defn neg?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isNegative a)))
 
 #?(:clj (def odd? clojure.core/odd?)
    :cljs
    (defn odd?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isOdd a)))
 
 (def even? (complement odd?))
@@ -56,16 +58,23 @@
    :cljs
    (defn zero?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isZero a)))
 
 #?(:clj (def mod clojure.core/mod)
    :cljs
    (defn mod
     [a b]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? b)]}
     (.modulo a b)))
 
-#?(:clj (def unchecked-negate clojure.core/unchecked-negate)
+#?(:clj
+   (defn unchecked-negate
+    [^long a]
+    (clojure.core/unchecked-negate a))
    :cljs
    (defn unchecked-negate
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.negate a)))

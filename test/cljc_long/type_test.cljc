@@ -6,5 +6,7 @@
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-(deftest ??long
- (is (l/long? (l/long "123"))))
+(deftest ??long?
+ (is (l/long? (l/long "123")))
+ (is (not (l/long? 123.0)))
+ (is (not (l/long? {}))))
