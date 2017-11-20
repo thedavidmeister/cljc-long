@@ -61,6 +61,10 @@
 (def bit-shift-left cljc-long.bitwise/bit-shift-left)
 (def bit-shift-right cljc-long.bitwise/bit-shift-right)
 (def unsigned-bit-shift-right cljc-long.bitwise/unsigned-bit-shift-right)
+(def high-bits cljc-long.bitwise/high-bits)
+(def low-bits cljc-long.bitwise/low-bits)
+(def unsigned-low-bits cljc-long.bitwise/unsigned-low-bits)
+(def absolute-number-bits cljc-long.bitwise/absolute-number-bits)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

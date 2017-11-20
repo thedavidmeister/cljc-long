@@ -1,7 +1,10 @@
 (ns cljc-long.bitwise
  (:refer-clojure :exclude [bit-and bit-not bit-or bit-xor bit-shift-left bit-shift-right unsigned-bit-shift-right])
  (:require
-  cljc-long.type))
+  cljc-long.type
+  cljc-long.comparison
+  cljc-long.arithmetic
+  cljc-long.constants))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
@@ -63,19 +66,38 @@
 
 (defn high-bits
  [^long a]
- #?(:cljs (.getHighBits a)))
+ #?(:cljs (.getHighBits a)
+    :clj (bit-shift-right a 32)))
 
 (defn low-bits
  [^long a]
- #?(:cljs (.getLowBits a)))
+ #?(:cljs (.getLowBits a)
+    :clj
+    (bit-shift-right
+     (bit-shift-left a 32)
+     32)))
 
-(defn low-bits-unsigned
+(defn unsigned-low-bits
  [^long a]
- #?(:cljs (.getLowBitsUnsigned a)))
+ #?(:cljs (.getLowBitsUnsigned a)
+    :clj
+    (unsigned-bit-shift-right
+     (bit-shift-left a 32)
+     32)))
 
 (defn absolute-number-bits
  [^long a]
- #?(:cljs (.getNumBitsAbs a)))
+ #?(:cljs (.getNumBitsAbs a)
+    :clj
+    ; mirror internal goog.math.Long logic for negs
+    (if (cljc-long.arithmetic/neg? a)
+     (if (cljc-long.comparison/= a cljc-long.constants/min-value)
+      64
+      (absolute-number-bits (cljc-long.arithmetic/unchecked-negate a)))
+     ; https://stackoverflow.com/questions/4300066/number-of-bits-used-in-long-java
+     (-
+      Long/SIZE
+      (Long/numberOfLeadingZeros a)))))
 
 ; @see int-rotate-left
 ; https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/core.cljs#L879

@@ -77,3 +77,38 @@
    (l/unsigned-bit-shift-right
     (l/long l/max-value)
     (l/long 33)))))
+
+(deftest ??high-bits
+ (is
+  (==
+   21800986
+   (l/high-bits (l/long "93634523492376492")))))
+
+(deftest ??low-bits
+ (is
+  (==
+   -7
+   (l/low-bits
+    (l/long "-100000000000000000000000000000000000000000000000000000000000111" 2)))))
+
+(deftest ??unsigned-low-bits
+ (is
+  (==
+   4294967289
+   (l/unsigned-low-bits
+    (l/long "-100000000000000000000000000000000000000000000000000000000000111" 2)))))
+
+(deftest ??absolute-number-bits
+ (doseq [[i o] [[l/min-value 64]
+                [l/max-value 63]
+                [1 1]
+                [-1 1]
+                [2 2]
+                [-2 2]
+                [3 2]
+                [-3 2]
+                [4 3]
+                [-4 3]
+                [8 4]
+                [-8 4]]]
+  (is (== o (l/absolute-number-bits (l/long i))))))
