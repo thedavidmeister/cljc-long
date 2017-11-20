@@ -1,5 +1,6 @@
 (ns cljc-long.core
  (:refer-clojure :exclude [long
+                           str
                            +
                            -
                            *
@@ -18,13 +19,17 @@
                            compare
                            unsigned-bit-shift-right
                            bit-shift-left
+                           bit-shift-right
                            bit-and
+                           bit-not
+                           bit-or
                            bit-xor])
 
  (:require
   #?(:cljs goog.math.Long)
   cljc-long.type
   cljc-long.arithmetic
+  cljc-long.bitwise
   cljc-long.constants
   cljc-long.comparison))
 
@@ -33,6 +38,7 @@
 
 (def long? cljc-long.type/long?)
 (def long cljc-long.type/long)
+(def str cljc-long.type/str)
 
 (def max-value cljc-long.constants/max-value)
 (def min-value cljc-long.constants/min-value)
@@ -47,6 +53,14 @@
 (def zero? cljc-long.arithmetic/zero?)
 (def mod cljc-long.arithmetic/mod)
 (def unchecked-negate cljc-long.arithmetic/unchecked-negate)
+
+(def bit-and cljc-long.bitwise/bit-and)
+(def bit-not cljc-long.bitwise/bit-not)
+(def bit-or cljc-long.bitwise/bit-or)
+(def bit-xor cljc-long.bitwise/bit-xor)
+(def bit-shift-left cljc-long.bitwise/bit-shift-left)
+(def bit-shift-right cljc-long.bitwise/bit-shift-right)
+(def unsigned-bit-shift-right cljc-long.bitwise/bit-shift-right)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

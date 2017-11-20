@@ -18,24 +18,31 @@
    :cljs
    (defn bit-not
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.not a)))
 
 #?(:clj (def bit-or clojure.core/bit-or)
    :cljs
    (defn bit-or
     [a b]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? b)]}
     (.or a b)))
 
 #?(:clj (def bit-xor clojure.core/bit-xor)
    :cljs
    (defn bit-xor
     [a b]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? b)]}
     (.xor a b)))
 
 #?(:clj (def bit-shift-left clojure.core/bit-shift-left)
    :cljs
    (defn bit-shift-left
     [a n]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? n)]}
     (.shiftLeft a n)))
 
 #?(:clj (def bit-shift-right clojure.core/bit-shift-right)
