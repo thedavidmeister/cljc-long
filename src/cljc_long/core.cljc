@@ -65,6 +65,7 @@
 (def low-bits cljc-long.bitwise/low-bits)
 (def unsigned-low-bits cljc-long.bitwise/unsigned-low-bits)
 (def absolute-number-bits cljc-long.bitwise/absolute-number-bits)
+(def bit-rotate-left cljc-long.bitwise/bit-rotate-left)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

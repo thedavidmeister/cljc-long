@@ -112,3 +112,11 @@
                 [8 4]
                 [-8 4]]]
   (is (== o (l/absolute-number-bits (l/long i))))))
+
+(deftest ??bit-rotate-left
+ (is
+  (l/=
+   (l/long "-6814464169451580147")
+   (l/bit-rotate-left
+    (l/long "3928749263476283476")
+    (l/long 6)))))
