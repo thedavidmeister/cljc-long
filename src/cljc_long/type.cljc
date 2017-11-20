@@ -1,5 +1,6 @@
 (ns cljc-long.type
- (:refer-clojure :exclude [long? long int double str]))
+ (:refer-clojure :exclude [long? long int double str])
+ #?(:cljs (:require goog.math.Long)))
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
@@ -9,19 +10,33 @@
     :clj (instance? Long a)))
 
 (defn long
- [a]
- {:post [(long? %)]}
- (cond
-  (long? a)
-  a
+ ([s r]
+  {:pre [(string? s)
+         (integer? r)]}
+  #?(:cljs (goog.math.Long.fromString s r)
+     :clj (Long/parseLong s r)))
+ ([a]
+  {:post [(long? %)]}
+  (cond
+   (long? a)
+   a
 
-  (string? a)
-  #?(:cljs (goog.math.Long.fromString a 10)
-     :clj (Long/parseLong a))
+   (string? a)
+   (long a 10)
 
-  (number? a)
-  #?(:cljs (goog.math.Long.fromNumber a)
-     :clj (cast Long a))))
+   (== a (clojure.core/int a))
+   #?(:cljs (goog.math.Long.fromInt a)
+      :clj (clojure.core/long a))
+
+   (number? a)
+   #?(:cljs (goog.math.Long.fromNumber a)
+      :clj (clojure.core/long a))
+
+   (sequential? a)
+   #?(:cljs (apply goog.math.Long/fromBits a)
+      :clj
+      ; @todo
+      a))))
 
 #?(:clj (def int clojure.core/int)
    :cljs
@@ -35,8 +50,14 @@
     [a]
     (.toNumber a)))
 
+(defn string-in-range?
+ ([s] (string-in-range? s 10))
+ ([s r]
+  #?(:cljs (goog.math.Long.isStringInRange s r))))
+
 (defn str
- ([^long a] (str a 10))
+ ([^long a]
+  (str a 10))
  ([^long a ^long radix]
   #?(:clj
      (Long/toString a radix)
