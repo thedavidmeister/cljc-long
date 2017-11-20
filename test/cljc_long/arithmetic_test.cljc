@@ -55,7 +55,8 @@
  (is (not (l/odd? (l/long 0))))
  (is (l/odd? (l/long 1)))
  (is (not (l/odd? (l/long 2))))
- (is (l/odd? (l/long 3))))
+ (is (l/odd? (l/long 3)))
+ (is (l/odd? (l/long "9007199254740993"))))
 
 (deftest ??even?
  (is (not (l/even? (l/long -3))))
@@ -64,9 +65,18 @@
  (is (l/even? (l/long 0)))
  (is (not (l/even? (l/long 1))))
  (is (l/even? (l/long 2)))
- (is (not (l/even? (l/long 3)))))
+ (is (not (l/even? (l/long 3))))
+ (is (not (l/even? (l/long "9007199254740993")))))
 
 (deftest ??zero?
  (is (not (l/zero? (l/long -1))))
  (is (l/zero? (l/long 0)))
  (is (not (l/zero? (l/long 1)))))
+
+(deftest ??mod
+ ; (mod 9007199254740993 2)
+ ; 0 in cljs
+ (is
+  (l/=
+   (l/long 1)
+   (l/mod (l/long "9007199254740993") (l/long 2)))))

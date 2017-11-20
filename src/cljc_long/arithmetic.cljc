@@ -65,10 +65,13 @@
    :cljs
    (defn mod
     [a b]
+    {:pre [(cljc-long.type/long? a)]}
+           ; (cljc-long.type/long? b)]}
     (.modulo a b)))
 
 #?(:clj (def unchecked-negate clojure.core/unchecked-negate)
    :cljs
    (defn unchecked-negate
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.negate a)))

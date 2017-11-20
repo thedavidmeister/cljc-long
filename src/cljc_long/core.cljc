@@ -8,6 +8,7 @@
                            odd?
                            even?
                            zero?
+                           mod
                            >
                            >=
                            =
@@ -43,6 +44,7 @@
 (def odd? cljc-long.arithmetic/odd?)
 (def even? cljc-long.arithmetic/even?)
 (def zero? cljc-long.arithmetic/zero?)
+(def mod cljc-long.arithmetic/mod)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)
