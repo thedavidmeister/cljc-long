@@ -6,6 +6,7 @@
                            /
                            neg?
                            odd?
+                           even?
                            >
                            >=
                            =
@@ -39,6 +40,7 @@
 (def / cljc-long.arithmetic//)
 (def neg? cljc-long.arithmetic/neg?)
 (def odd? cljc-long.arithmetic/odd?)
+(def even? cljc-long.arithmetic/even?)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

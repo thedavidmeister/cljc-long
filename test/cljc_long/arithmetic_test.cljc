@@ -56,3 +56,12 @@
  (is (l/odd? (l/long 1)))
  (is (not (l/odd? (l/long 2))))
  (is (l/odd? (l/long 3))))
+
+(deftest ??even?
+ (is (not (l/even? (l/long -3))))
+ (is (l/even? (l/long -2)))
+ (is (not (l/even? (l/long -1))))
+ (is (l/even? (l/long 0)))
+ (is (not (l/even? (l/long 1))))
+ (is (l/even? (l/long 2)))
+ (is (not (l/even? (l/long 3)))))
