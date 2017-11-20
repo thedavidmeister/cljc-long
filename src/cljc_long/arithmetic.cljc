@@ -58,6 +58,7 @@
    :cljs
    (defn zero?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isZero a)))
 
 #?(:clj (def mod clojure.core/mod)

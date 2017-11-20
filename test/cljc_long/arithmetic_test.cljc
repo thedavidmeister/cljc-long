@@ -65,3 +65,8 @@
  (is (not (l/even? (l/long 1))))
  (is (l/even? (l/long 2)))
  (is (not (l/even? (l/long 3)))))
+
+(deftest ??zero?
+ (is (not (l/zero? (l/long -1))))
+ (is (l/zero? (l/long 0)))
+ (is (not (l/zero? (l/long 1)))))
