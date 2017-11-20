@@ -24,19 +24,27 @@
    (string? a)
    (long a 10)
 
+   (sequential? a)
+   #?(:cljs (apply goog.math.Long/fromBits a)
+      :clj
+      ; https://stackoverflow.com/questions/10686178/convert-long-to-two-int-and-vice-versa
+      (let [[l h] a]
+       ; use core bitwise fns to avoid circular deps on the ns
+       (bit-or
+        (bit-shift-left ^long (long h) 32)
+        (unsigned-bit-shift-right
+         (bit-shift-left
+          ^long (long l)
+          ^long (long 1))
+         ^long (long 1)))))
+
    (= a (clojure.core/int a))
    #?(:cljs (goog.math.Long.fromInt a)
       :clj (clojure.core/long a))
 
    (number? a)
    #?(:cljs (goog.math.Long.fromNumber a)
-      :clj (clojure.core/long a))
-
-   (sequential? a)
-   #?(:cljs (apply goog.math.Long/fromBits a)
-      :clj
-      ; @todo
-      a))))
+      :clj (clojure.core/long a)))))
 
 #?(:clj (def int clojure.core/int)
    :cljs
