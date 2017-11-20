@@ -4,6 +4,7 @@
                            -
                            *
                            /
+                           neg?
                            >
                            >=
                            =
@@ -35,6 +36,7 @@
 (def - cljc-long.arithmetic/-)
 (def * cljc-long.arithmetic/*)
 (def / cljc-long.arithmetic//)
+(def neg? cljc-long.arithmetic/neg?)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

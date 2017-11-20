@@ -42,6 +42,7 @@
    :cljs
    (defn neg?
     [a]
+    {:pre [(cljc-long.type/long? a)]}
     (.isNegative a)))
 
 #?(:clj (def odd? clojure.core/odd?)

@@ -42,3 +42,8 @@
    (l//
     (l/long "54043195528445970")
     (l/long 2)))))
+
+(deftest ??neg?
+ (is (l/neg? (l/long -1)))
+ (is (not (l/neg? (l/long 0))))
+ (is (not (l/neg? (l/long 1)))))
