@@ -9,6 +9,7 @@
                            even?
                            zero?
                            mod
+                           unchecked-negate
                            >
                            >=
                            =
@@ -45,6 +46,7 @@
 (def even? cljc-long.arithmetic/even?)
 (def zero? cljc-long.arithmetic/zero?)
 (def mod cljc-long.arithmetic/mod)
+(def unchecked-negate cljc-long.arithmetic/unchecked-negate)
 
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)

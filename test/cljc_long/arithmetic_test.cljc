@@ -80,3 +80,26 @@
   (l/=
    (l/long 1)
    (l/mod (l/long "9007199254740993") (l/long 2)))))
+
+(deftest ??unchecked-negate
+ (is
+  (l/=
+   l/min-value
+   (l/unchecked-negate cljc-long.constants/min-value)))
+
+ (is
+  (l/=
+   (l/+ l/min-value (l/long 1))
+   (l/unchecked-negate l/max-value)))
+
+ (is (l/zero? (l/unchecked-negate (l/long 0))))
+
+ (is
+  (l/=
+   (l/long -1)
+   (l/unchecked-negate (l/long 1))))
+
+ (is
+  (l/=
+   (l/long 1)
+   (l/unchecked-negate (l/long -1)))))
