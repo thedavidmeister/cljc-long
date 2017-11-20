@@ -66,11 +66,13 @@
 
 (defn high-bits
  [^long a]
+ {:pre [(cljc-long.type/long? a)]}
  #?(:cljs (.getHighBits a)
     :clj (bit-shift-right a 32)))
 
 (defn low-bits
  [^long a]
+ {:pre [(cljc-long.type/long? a)]}
  #?(:cljs (.getLowBits a)
     :clj
     (bit-shift-right
@@ -79,6 +81,7 @@
 
 (defn unsigned-low-bits
  [^long a]
+ {:pre [(cljc-long.type/long? a)]}
  #?(:cljs (.getLowBitsUnsigned a)
     :clj
     (unsigned-bit-shift-right
@@ -87,6 +90,7 @@
 
 (defn absolute-number-bits
  [^long a]
+ {:pre [(cljc-long.type/long? a)]}
  #?(:cljs (.getNumBitsAbs a)
     :clj
     ; mirror internal goog.math.Long logic for negs
@@ -103,6 +107,8 @@
 ; https://github.com/clojure/clojurescript/blob/master/src/main/cljs/cljs/core.cljs#L879
 (defn bit-rotate-left
  [^long x ^long n]
+ {:pre [(cljc-long.type/long? x)
+        (cljc-long.type/long? n)]}
  #?(:cljs
     (.or
      (.shiftLeft x n)

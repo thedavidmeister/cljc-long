@@ -34,6 +34,8 @@
    :cljs
    (defn not=
     [a b]
+    {:pre [(cljc-long.type/long? a)
+           (cljc-long.type/long? b)]}
     (.notEquals a b)))
 
 #?(:clj (def <= clojure.core/<=)
