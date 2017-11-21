@@ -85,7 +85,7 @@ The JVM natively supports signed 64 bit integers as `Long` and clojure natively 
 
 Many of the functions here are simple wrappers with type hinting for clojure core functions OR direct references to a core clojure function.
 
-E.g.
+e.g.
 
 ```clojure
 (defn +
@@ -129,7 +129,7 @@ This library provides consistently named variadic functions in clojurescript eve
 
 Many of the functions here are wrappers around the `goog.math.Long` methods.
 
-E.g.
+e.g.
 
 ```clojure
 (defn bit-xor
