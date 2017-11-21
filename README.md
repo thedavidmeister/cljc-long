@@ -10,6 +10,77 @@ A few new functions have been added too, e.g. `long?`.
 
 If you want a new function added, please feel free to open a github issue!
 
+## Supported functions by namespace
+
+For convenience and API stability, every namespace is aliased into `cljc-long.core`. For example, `cljc-long.core/+` is a direct reference to `cljc-long.arithmetic/+`.
+
+### Namespaces & functions
+
+`cljc-long.arithmetic`
+
+All these functions follow clojure core.
+
+`+`, `-`, `*`, `/`, `neg?`, `odd?`, `even?`, `zero?`, `mod`, `unchecked-negate`.
+
+`cljc-long.bitwise`
+
+This is a mix of functions from clojure core, `goog.math.Long` and Java functionality.
+
+From core:
+
+`bit-and`, `bit-not`, `bit-or`, `bit-xor`, `bit-shift-left`, `bit-shift-right`, `unsigned-bit-shift-right`.
+
+From `goog.math.Long`:
+
+`high-bits`: The high 32-bits as a signed value.
+`low-bits`: The low 32-bits as a signed value.
+`unsigned-low-bits`: The low 32-bits as an unsigned value.
+`absolute-number-bits`: Returns the number of bits needed to represent the absolute value of this Long.
+
+From Java:
+
+`bit-rotate-left`: As per `Long/rotateLeft`.
+
+`cljc-long.coerce`
+
+This is a set of convenience functions, mixing the features and normalising the limitations of clojure and `goog.math.Long`.
+
+`long`: Coerce a long, string, tuple, 32 bit int or any other number to a `Long` or `goog.math.Long`. String coercion supports an optional radix parameter, e.g. `(cljc-long.coerce/long "10" 16) ; 16`
+
+`str`: Coerce a long to a string. Supports an optional radix parameter, e.g. `(cljc-long.coerce/str (cljc-long.coerce/long 16) 16) ; "10"`
+
+`int`: Coerce a long to a 32 bit int. Errors if value is out of 32 bit range, as per clojure.
+
+`double`: Coerce a long to a double as per clojure.
+
+`string-in-range?`: Returns true if passed a string that can be coerced to a 64 bit long. Supports an optional radix parameter.
+
+`cljc-long.comparison`
+
+These functions are all as per clojure.
+
+`>`, `>=`, `=`, `not=`, `<=`, `<`, `compare`.
+
+`cljc-long.constants`
+
+These constants are all as per static methods of `goog.math.Long`.
+
+`max-value`: Equivalent to `Long/MAX_VALUE` on the JVM.
+
+`min-value`: Equivalent to `Long/MIN_VALUE` on the JVM.
+
+`zero`: Zero as a long.
+
+`one`: One as a long.
+
+`neg-one`: Negative one as a long.
+
+`two-power-24`: 2^24 as a long.
+
+`cljc-long.type`
+
+`long?`: Returns `true` if passed a value with type `Long` or `goog.math.Long`.
+
 ## Clojure
 
 The JVM natively supports signed 64 bit integers as `Long` and clojure natively provides most of the wrappers we need here.
