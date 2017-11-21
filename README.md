@@ -14,12 +14,14 @@ If you want a new function added, please feel free to open a github issue!
 
 The JVM natively supports signed 64 bit integers as `Long` and clojure natively provides most of the wrappers we need here.
 
-Many of the functions here are simply direct references to clojure core functions.
+Many of the functions here are simple wrappers with type hinting for clojure core functions.
 
 E.g.
 
 ```clojure
-(def bit-xor clojure.core/bit-xor)
+(defn +
+ [^long a ^long b]
+ (clojure.core/+ a b))
 ```
 
 ## ClojureScript

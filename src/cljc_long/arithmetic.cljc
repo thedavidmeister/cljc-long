@@ -6,7 +6,10 @@
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-#?(:clj (def + clojure.core/+)
+#?(:clj
+   (defn +
+    [^long a ^long b]
+    (clojure.core/+ a b))
    :cljs
    (defn +
     [a b]
@@ -14,7 +17,10 @@
            (cljc-long.type/long? b)]}
     (.add a b)))
 
-#?(:clj (def - clojure.core/-)
+#?(:clj
+   (defn -
+    [^long a ^long b]
+    (clojure.core/- a b))
    :cljs
    (defn -
     [a b]
@@ -22,7 +28,10 @@
            (cljc-long.type/long? b)]}
     (.subtract a b)))
 
-#?(:clj (def * clojure.core/*)
+#?(:clj
+   (defn *
+    [^long a ^long b]
+    (clojure.core/* a b))
    :cljs
    (defn *
     [a b]
@@ -30,7 +39,10 @@
            (cljc-long.type/long? b)]}
     (.multiply a b)))
 
-#?(:clj (def / clojure.core//)
+#?(:clj
+   (defn /
+    [^long a ^long b]
+    (clojure.core// a b))
    :cljs
    (defn /
     [a b]
@@ -61,7 +73,10 @@
     {:pre [(cljc-long.type/long? a)]}
     (.isZero a)))
 
-#?(:clj (def mod clojure.core/mod)
+#?(:clj
+   (defn mod
+    [^long a ^long b]
+    (clojure.core/mod a b))
    :cljs
    (defn mod
     [a b]
