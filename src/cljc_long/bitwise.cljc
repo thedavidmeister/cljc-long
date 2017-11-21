@@ -12,10 +12,12 @@
 #?(:clj (def bit-and clojure.core/bit-and)
    :cljs
    (defn bit-and
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.and a b)))
+    ([a b & xs]
+     (reduce bit-and (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.and a b))))
 
 #?(:clj (def bit-not clojure.core/bit-not)
    :cljs
@@ -27,18 +29,22 @@
 #?(:clj (def bit-or clojure.core/bit-or)
    :cljs
    (defn bit-or
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.or a b)))
+    ([a b & xs]
+     (reduce bit-or (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.or a b))))
 
 #?(:clj (def bit-xor clojure.core/bit-xor)
    :cljs
    (defn bit-xor
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.xor a b)))
+    ([a b & xs]
+     (reduce bit-xor (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.xor a b))))
 
 #?(:clj (def bit-shift-left clojure.core/bit-shift-left)
    :cljs

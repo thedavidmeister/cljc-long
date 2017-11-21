@@ -29,7 +29,8 @@
      (clojure.core/- a b)))
    :cljs
    (defn -
-    ([a b & xs] (do-loop a b xs -))
+    ([a b & xs]
+     (reduce - (into [a b] xs)))
     ([a b]
      {:pre [(cljc-long.type/long? a)
             (cljc-long.type/long? b)]}
