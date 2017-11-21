@@ -95,6 +95,16 @@
    (l/long "27021597764222985")
    (l//
     (l/long "54043195528445970")
+    (l/long 2))))
+
+ ; moar arity
+ (is
+  (l/=
+   (l/long 2)
+   (l//
+    (l/long 16)
+    (l/long 2)
+    (l/long 2)
     (l/long 2)))))
 
 (deftest ??neg?
