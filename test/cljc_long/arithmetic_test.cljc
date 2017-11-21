@@ -11,7 +11,15 @@
    (l/long "9007199254740993")
    (l/+
     (l/long "9007199254740992")
-    (l/long 1)))))
+    (l/long 1))))
+
+ ; can trigger integer overflow in jvm if not careful
+ (is
+  (l/=
+   (l/long 4661505866122819911)
+   (l/+
+    (l/long -6739208953200378574)
+    (l/long -7046029254386353131)))))
 
 (deftest ??-
  ; (- 9007199254740994 1)

@@ -6,7 +6,10 @@
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-#?(:clj (def + clojure.core/+)
+#?(:clj
+   (defn +
+    [^long a ^long b]
+    (clojure.core/+ a b))
    :cljs
    (defn +
     [a b]
