@@ -16,6 +16,7 @@
                            >
                            >=
                            =
+                           not=
                            <=
                            <
                            compare
@@ -80,6 +81,7 @@
 (def > cljc-long.comparison/>)
 (def >= cljc-long.comparison/>=)
 (def = cljc-long.comparison/=)
+(def not= cljc-long.comparison/not=)
 (def <= cljc-long.comparison/<=)
 (def < cljc-long.comparison/<)
 (def compare cljc-long.comparison/compare)
