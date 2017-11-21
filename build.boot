@@ -1,5 +1,5 @@
 (def project 'thedavidmeister/cljc-long)
-(def version "1.0.0")
+(def version "1.0.1-SNAPSHOT")
 (def description "Signed 64 bit integers for CLJC")
 (def url "https://github.com/thedavidmeister/cljc-long")
 
