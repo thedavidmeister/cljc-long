@@ -8,47 +8,63 @@
 
 #?(:clj
    (defn +
-    [^long a ^long b]
-    (clojure.core/+ a b))
+    ([a b & xs]
+     (reduce + (into [a b] xs)))
+    ([^long a ^long b]
+     (clojure.core/+ a b)))
    :cljs
    (defn +
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.add a b)))
+    ([a b & xs]
+     (reduce + (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.add a b))))
 
 #?(:clj
    (defn -
-    [^long a ^long b]
-    (clojure.core/- a b))
+    ([a b & xs]
+     (reduce - (into [a b] xs)))
+    ([^long a ^long b]
+     (clojure.core/- a b)))
    :cljs
    (defn -
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.subtract a b)))
+    ([a b & xs]
+     (reduce - (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.subtract a b))))
 
 #?(:clj
    (defn *
-    [^long a ^long b]
-    (clojure.core/* a b))
+    ([a b & xs]
+     (reduce * (into [a b] xs)))
+    ([^long a ^long b]
+     (clojure.core/* a b)))
    :cljs
    (defn *
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.multiply a b)))
+    ([a b & xs]
+     (reduce * (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.multiply a b))))
 
 #?(:clj
    (defn /
-    [^long a ^long b]
-    (clojure.core// a b))
+    ([a b & xs]
+     (reduce / (into [a b] xs)))
+    ([^long a ^long b]
+     (clojure.core// a b)))
    :cljs
    (defn /
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.div a b)))
+    ([a b & xs]
+     (reduce / (into [a b] xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.div a b))))
 
 #?(:clj (def neg? clojure.core/neg?)
    :cljs

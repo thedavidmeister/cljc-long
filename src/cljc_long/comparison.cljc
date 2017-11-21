@@ -9,50 +9,82 @@
 #?(:clj (def > clojure.core/>)
    :cljs
    (defn >
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.greaterThan a b)))
+    ([a b & xs]
+     (if (> a b)
+      (if (next xs)
+       (recur b (first xs) (next xs))
+       (> b (first xs)))
+      false))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.greaterThan a b))))
 
 #?(:clj (def >= clojure.core/>=)
    :cljs
    (defn >=
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.greaterThanOrEqual a b)))
+    ([a b & xs]
+     (if (>= a b)
+      (if (next xs)
+       (recur b (first xs) (next xs))
+       (>= b (first xs)))
+      false))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.greaterThanOrEqual a b))))
 
 #?(:clj (def = clojure.core/=)
    :cljs
    (defn =
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.equals a b)))
+    ([a b & xs]
+     (if (= a b)
+      (if (next xs)
+       (recur b (first xs) (next xs))
+       (= b (first xs)))
+      false))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.equals a b))))
 
 #?(:clj (def not= clojure.core/not=)
    :cljs
    (defn not=
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.notEquals a b)))
+    ([a b & xs]
+     (not (apply = a b xs)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.notEquals a b))))
 
 #?(:clj (def <= clojure.core/<=)
    :cljs
    (defn <=
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.lessThanOrEqual a b)))
+    ([a b & xs]
+     (if (<= a b)
+      (if (next xs)
+       (recur b (first xs) (next xs))
+       (<= b (first xs)))
+      false))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.lessThanOrEqual a b))))
 
 #?(:clj (def < clojure.core/<)
    :cljs
    (defn <
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.lessThan a b)))
+    ([a b & xs]
+     (if (< a b)
+      (if (next xs)
+       (recur b (first xs) (next xs))
+       (< b (first xs)))
+      false))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.lessThan a b))))
 
 #?(:clj (def compare clojure.core/compare)
    :cljs
