@@ -17,7 +17,10 @@
            (cljc-long.type/long? b)]}
     (.add a b)))
 
-#?(:clj (def - clojure.core/-)
+#?(:clj
+   (defn -
+    [^long a ^long b]
+    (clojure.core/- a b))
    :cljs
    (defn -
     [a b]
