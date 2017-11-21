@@ -4,11 +4,9 @@ Signed 64 bit integers for Clojure(Script).
 
 [![Clojars Project](https://img.shields.io/clojars/v/thedavidmeister/cljc-long.svg)](https://clojars.org/thedavidmeister/cljc-long)
 
-Function names follow clojure conventions, e.g. [`bit-xor`](https://clojuredocs.org/clojure.core/bit-xor) not just `xor`.
+Function names and behaviour follow clojure conventions, e.g. [`bit-xor`](https://clojuredocs.org/clojure.core/bit-xor) not just `xor`.
 
-A few new functions have been added too, e.g. `long?`.
-
-If you want a new function added, please feel free to open a github issue!
+A few new functions have been added too, notably `long?` and `bit-rotate-left`.
 
 ## Supported functions by namespace
 
@@ -85,7 +83,7 @@ These constants are all as per static methods of `goog.math.Long`.
 
 The JVM natively supports signed 64 bit integers as `Long` and clojure natively provides most of the wrappers we need here.
 
-Many of the functions here are simple wrappers with type hinting for clojure core functions.
+Many of the functions here are simple wrappers with type hinting for clojure core functions OR direct references to a core clojure function.
 
 E.g.
 
@@ -113,7 +111,7 @@ In short, we get this scenario:
 
 Most of the time the difference between integers and floats doesn't matter at all, but sometimes it really does matter and native JavaScript comes up short.
 
-Notably we don't get access to the full 64 bits for integer operations. JavaScript "integers" only supports [53 bits for regular arithmatic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) and [32 bits for bitwise operations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
+Notably we don't get access to the full 64 bits for integer operations. JavaScript's "integer" only supports [53 bits for regular arithmatic](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) and [32 bits for bitwise operations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
 ```clojure
 ; clojure/JVM
@@ -125,9 +123,9 @@ Notably we don't get access to the full 64 bits for integer operations. JavaScri
 (bit-shift-left 4294967296 1) ; 0
 ```
 
-Google Closure provides full 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions. For example, `(= a b c)` is valid in clojure but the closure equivalent would be something like `(and (.equals a b) (.equals b c))`.
+Google Closure provides full 64 bit integer support via the `goog.math.Long` class, but the methods are a little clumsier than native clojure functions. For example, `(= a b c)` is valid in clojure but the native clojurescript equivalent would be something like `(and (.equals a b) (.equals b c))`.
 
-Arbitrary arities are currently not supported as `goog.math.Long` doesn't support arbitrary arities. [This might change in the future](https://github.com/thedavidmeister/cljc-long/issues/1).
+This library provides consistently named variadic functions in clojurescript everywhere that there is an equivalent clojure function. This means that `(= a b c)` and similar will work for longs on both platforms.
 
 Many of the functions here are wrappers around the `goog.math.Long` methods.
 
@@ -135,8 +133,12 @@ E.g.
 
 ```clojure
 (defn bit-xor
-  [a b]
-  (.xor a b))
+ ([a b & xs]
+  (reduce bit-xor (into [a b] xs)))
+ ([a b]
+  {:pre [(cljc-long.type/long? a)
+         (cljc-long.type/long? b)]}
+  (.xor a b))))
 ```
 
 This abstraction is a little leaky though as the return values necessarily need to be `goog.math.Long` _objects_ rather than native floats.
