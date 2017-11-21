@@ -35,8 +35,8 @@
         (cljc-long.bitwise/unsigned-bit-shift-right
          (cljc-long.bitwise/bit-shift-left
           ^long (long l)
-          ^long (long 1))
-         ^long (long 1)))))
+          1)
+         1))))
 
    (= a (clojure.core/int a))
    #?(:cljs (goog.math.Long.fromInt a)
@@ -48,10 +48,10 @@
 
 (defn str
  ([^long a]
-  (str a (long 10)))
+  (str a 10))
  ([^long a ^long radix]
   {:pre [(cljc-long.type/long? a)
-         (cljc-long.type/long? radix)]}
+         (int? radix)]}
   #?(:clj
      (Long/toString a radix)
      :cljs
@@ -79,9 +79,10 @@
     (.toNumber a)))
 
 (defn string-in-range?
- ([s] (string-in-range? s (long 10)))
+ ([s] (string-in-range? s 10))
  ([s r]
-  {:pre [(string? s)]}
+  {:pre [(string? s)
+         (int? r)]}
   #?(:cljs (goog.math.Long.isStringInRange s r)
      :clj (try
            (boolean (long s r))

@@ -45,7 +45,7 @@
    (defn bit-shift-left
     [a n]
     {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? n)]}
+           (int? n)]}
     (.shiftLeft a n)))
 
 #?(:clj (def bit-shift-right clojure.core/bit-shift-right)
@@ -53,7 +53,7 @@
    (defn bit-shift-right
     [a n]
     {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? n)]}
+           (int? n)]}
     (.shiftRight a n)))
 
 #?(:clj (def unsigned-bit-shift-right clojure.core/unsigned-bit-shift-right)
@@ -61,7 +61,7 @@
    (defn unsigned-bit-shift-right
     [a n]
     {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? n)]}
+           (int? n)]}
     (.shiftRightUnsigned a n)))
 
 (defn high-bits
@@ -108,10 +108,10 @@
 (defn bit-rotate-left
  [^long x ^long n]
  {:pre [(cljc-long.type/long? x)
-        (cljc-long.type/long? n)]}
+        (int? n)]}
  #?(:cljs
-    (.or
-     (.shiftLeft x n)
-     (.shiftRightUnsigned x (clojure.core/- n)))
+    (bit-or
+     (bit-shift-left x n)
+     (unsigned-bit-shift-right x (clojure.core/- n)))
     :clj
     (Long/rotateLeft x n)))

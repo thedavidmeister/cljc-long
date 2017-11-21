@@ -46,7 +46,7 @@
    (l/long "7427761112226416")
    (l/bit-shift-left
     (l/long "928470139028302")
-    (l/long 3)))))
+    3))))
 
 (deftest ??bit-shift-right
  (is
@@ -54,14 +54,14 @@
    (l/long "-1152921504606846976")
    (l/bit-shift-right
     (l/long "-100000000000000000000000000000000000000000000000000000000000000" 2)
-    (l/long 2))))
+    2)))
 
  (is
   (l/=
    (l/long "1073741823")
    (l/bit-shift-right
     (l/long l/max-value)
-    (l/long 33)))))
+    33))))
 
 (deftest ??unsigned-bit-shift-right
  (is
@@ -69,14 +69,14 @@
    (l/long "3458764513820540928")
    (l/unsigned-bit-shift-right
     (l/long "-100000000000000000000000000000000000000000000000000000000000000" 2)
-    (l/long 2))))
+    2)))
 
  (is
   (l/=
    (l/long "1073741823")
    (l/unsigned-bit-shift-right
     (l/long l/max-value)
-    (l/long 33)))))
+    33))))
 
 (deftest ??high-bits
  (is
@@ -119,4 +119,4 @@
    (l/long "-6814464169451580147")
    (l/bit-rotate-left
     (l/long "3928749263476283476")
-    (l/long 6)))))
+    6))))
