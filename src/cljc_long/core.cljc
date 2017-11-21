@@ -83,14 +83,3 @@
 (def <= cljc-long.comparison/<=)
 (def < cljc-long.comparison/<)
 (def compare cljc-long.comparison/compare)
-
-(defn native-rand
- []
- #?(:cljs
-    ; lifted from https://cljs.github.io/api/cljs.core/random-uuid
-    (let [hex #(.toString (rand-int 16) 16)]
-     (goog.math.Long.fromString
-      (apply str (take 16 (repeatedly hex)))
-      16))
-    :clj
-    (.nextLong (java.util.Random.))))
