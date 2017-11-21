@@ -8,14 +8,22 @@
 
 #?(:clj
    (defn +
-    [^long a ^long b]
-    (clojure.core/+ a b))
+    ([a b & xs]
+     (apply clojure.core/+ (into [a b] xs)))
+    ([^long a ^long b]
+     (clojure.core/+ a b)))
    :cljs
    (defn +
-    [a b]
-    {:pre [(cljc-long.type/long? a)
-           (cljc-long.type/long? b)]}
-    (.add a b)))
+    ([a b & xs]
+     (loop [v (+ a b)
+            [x & xs'] xs]
+      (if x
+       (recur (+ v x) xs')
+       v)))
+    ([a b]
+     {:pre [(cljc-long.type/long? a)
+            (cljc-long.type/long? b)]}
+     (.add a b))))
 
 #?(:clj
    (defn -
