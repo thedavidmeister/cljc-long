@@ -6,24 +6,16 @@
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
-(defn do-loop
- [a b xs f]
- (loop [v (f a b)
-        [x & xs'] xs]
-  (if x
-   (recur (f v x) xs')
-   v)))
-
 #?(:clj
    (defn +
     ([a b & xs]
-     (do-loop a b xs +))
+     (reduce + (into [a b] xs)))
     ([^long a ^long b]
      (clojure.core/+ a b)))
    :cljs
    (defn +
     ([a b & xs]
-     (do-loop a b xs +))
+     (reduce + (into [a b] xs)))
     ([a b]
      {:pre [(cljc-long.type/long? a)
             (cljc-long.type/long? b)]}
@@ -32,7 +24,7 @@
 #?(:clj
    (defn -
     ([a b & xs]
-     (do-loop a b xs -))
+     (reduce - (into [a b] xs)))
     ([^long a ^long b]
      (clojure.core/- a b)))
    :cljs
@@ -46,13 +38,13 @@
 #?(:clj
    (defn *
     ([a b & xs]
-     (do-loop a b xs *))
+     (reduce * (into [a b] xs)))
     ([^long a ^long b]
      (clojure.core/* a b)))
    :cljs
    (defn *
     ([a b & xs]
-     (do-loop a b xs *))
+     (reduce * (into [a b] xs)))
     ([a b]
      {:pre [(cljc-long.type/long? a)
             (cljc-long.type/long? b)]}
@@ -61,12 +53,13 @@
 #?(:clj
    (defn /
     ([a b & xs]
-     (do-loop a b xs /))
+     (reduce / (into [a b] xs)))
     ([^long a ^long b]
      (clojure.core// a b)))
    :cljs
    (defn /
-    ([a b & xs] (do-loop a b xs /))
+    ([a b & xs]
+     (reduce / (into [a b] xs)))
     ([a b]
      {:pre [(cljc-long.type/long? a)
             (cljc-long.type/long? b)]}
